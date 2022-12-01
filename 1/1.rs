@@ -12,19 +12,19 @@ fn star1() {
 
     let splitted = contents.split("\n");
 
-    let mut highest = 0;
+    let mut sum = 0;
     let mut temp = 0;
 
     for s in splitted {
         match s {
             "" => {
-                if highest < temp { highest = temp };
+                if sum < temp { sum = temp };
                 temp = 0;
             },
             _  => temp += s.parse::<i32>().unwrap(),
         }
     }
-    println!("{}", highest);
+    println!("{}", sum);
 }
 
 fn star2() {
