@@ -16,6 +16,7 @@ static LETTERS: [char; 52] = [
 
 fn main() {
     star1();
+    star2();
 }
 
 fn star1() {
@@ -43,6 +44,37 @@ fn star1() {
                             .position(|&c| c == m)
                             .unwrap() as i32 + 1
                 });
+
+    println!("{:?}", ans);
+}
+
+fn star2(){
+    let ans: i32 = String::from(fs::read_to_string("input.in")
+                .expect("Should have been able to read file"))
+                .split("\n")
+                .map(|line| line
+                            .chars()
+                            .collect::<Vec<char>>())
+                .collect::<Vec<Vec<char>>>()
+                .chunks(3)
+                .map(|group| {
+                    let one = &group[0];
+                    let two = &group[1];
+                    let three = &group[2];
+                    
+                    let mut m = ' ';
+                    
+                    for c in one {
+                        if two.contains(&c) && three.contains(&c) {
+                            m = *c;
+                        }
+                    }
+
+                    LETTERS
+                        .iter()
+                        .position(|&c| c == m)
+                        .unwrap() as i32 + 1
+                }).sum();
 
     println!("{:?}", ans);
 }
