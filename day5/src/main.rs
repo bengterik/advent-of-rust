@@ -54,13 +54,13 @@ fn move_crates1(stack: &mut Vec<Vec<char>>, nbr: i32, from: i32, to: i32) {
 
 fn move_crates2(stack: &mut Vec<Vec<char>>, nbr: i32, from: i32, to: i32) {
     let mut temp: Vec<char> = Vec::new();
-    
+        
+    // Push the crates to temp and then to the appropriate stack
     for _ in 0..nbr {
         let popped = stack[from as usize].pop().unwrap();
         temp.push(popped);
     }
 
-    // Push the crates to temp and then to the appropriate stack
     for _ in 0..nbr {
         let popped = temp.pop().unwrap();
         stack[to as usize].push(popped);
