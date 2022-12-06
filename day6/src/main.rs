@@ -2,19 +2,19 @@ use std::{fs};
 use itertools::Itertools;
 
 fn main() {
-    star1();
-    star2();
+    msg_start(4); // star 1 
+    msg_start(14); // star 2
 }
 
-fn star2() {
+fn msg_start(seq_length: usize) {
     let inp = String::from(fs::read_to_string("in.in")
                 .expect("Should have been able to read file"))
                 .chars()
                 .collect::<Vec<char>>()
-                .windows(14)
-                .try_fold(0, |index: i32, w| {
+                .windows(seq_length)
+                .try_fold(0, |index: usize, w| {
                     if w.iter().all_unique() {
-                        Err(index+14) 
+                        Err(index+seq_length) 
                     } else {
                         Ok(index+1)
                     }
@@ -22,28 +22,7 @@ fn star2() {
 
     let ans = match inp {
                     Err(i) => i,
-                    Ok(_) => -1,
-                };
-    println!("{:#?}", ans);
-}
-
-fn star1() {
-    let inp = String::from(fs::read_to_string("in.in")
-                .expect("Should have been able to read file"))
-                .chars()
-                .collect::<Vec<char>>()
-                .windows(4)
-                .try_fold(0, |index: i32, w| {
-                    if w.iter().all_unique() {
-                        Err(index+4) 
-                    } else {
-                        Ok(index+1)
-                    }
-                });
-
-    let ans = match inp {
-                    Err(i) => i,
-                    Ok(_) => -1,
+                    Ok(_) => 0,
                 };
     println!("{:#?}", ans);
 }
